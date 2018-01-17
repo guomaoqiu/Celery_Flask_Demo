@@ -1,0 +1,93 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}关于我所有{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{  url_for('static',filename='css/sweetalert.css') }}">
+
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+               <a class="navbar-brand" href="/">
+                <b style="font-family:fantasy;color:#5bc0de">
+                    <span>Simple</span>
+                </b></a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            <li><a href="#">主页</a></li>
+            {% if current_user.is_authenticated %}
+            <!--  仅管理员可以访问的视图  -->
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b> 已登录</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
+                        <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                    </ul>
+
+                </li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login') }}" >Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+     {% for message in get_flashed_messages(with_categories=True) %}
+                 <div class="alert alert-{{ message[0] }}">
+                     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <b>{{ message[1] }}</b>
+                 </div>
+        {% endfor %}
+
+{% block page_content %}{% endblock %}
+
+</div>
+<br>
+<hr>
+<div class="footer row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <p>© 2018 <b>
+            <b style="font-family:fantasy;color:#fb0700;font-size:15px">
+             <!--       <span>Life is short,You need Python😁</span> -->
+                </b
+        </b> 
+    </div>
+    <div class="col-md-2">
+        <p class="pull-right"><a id="totop" href="#">返回顶部</a></p>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{  url_for('static',filename='js/sweetalert.min.js') }}"></script>
+
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
