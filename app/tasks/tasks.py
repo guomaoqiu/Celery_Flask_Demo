@@ -16,12 +16,9 @@ def task1():
 
 @celery.task(name="task2")
 def task2():
-    import commands
     # 记录日志
     print u"定时任务task2：每10秒执行一次" + current_time 
-    result=commands.getoutput("echo 'ok'")
     logger.info(u"echo成功")
-
 
 
 

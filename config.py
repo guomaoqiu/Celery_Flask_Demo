@@ -22,18 +22,18 @@ class Config:
     CELERY_BROKER_URL = 'redis://localhost:6379',
     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
     CELERY_TIMEZONE = 'Asia/Shanghai'
-    CELERYBEAT_SCHEDULE = {
-        #＃ 定义任务名称：task1、task2
-        #＃ 执行规则：通过timedelta定义
-        'task1': {
-            'task': 'task1',
-            'schedule': timedelta(seconds=5)
-        },
-        'task2': {
-            'task': 'task2',
-            'schedule': timedelta(seconds=10)
-        },
-    }
+    # CELERYBEAT_SCHEDULE = {
+    #     #＃ 定义任务名称：task1、task2
+    #     #＃ 执行规则：通过timedelta定义
+    #     'task1': {
+    #         'task': 'task1',
+    #         'schedule': timedelta(seconds=5)
+    #     },
+    #     'task2': {
+    #         'task': 'task2',
+    #         'schedule': timedelta(seconds=10)
+    #     },
+    # }
 
 
     @staticmethod
