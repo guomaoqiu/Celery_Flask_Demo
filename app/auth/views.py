@@ -11,6 +11,9 @@ from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
 
 
+
+
+
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated:

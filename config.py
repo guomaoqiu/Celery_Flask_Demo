@@ -25,14 +25,15 @@ class Config:
     # CELERYBEAT_SCHEDULE = {
     #     #＃ 定义任务名称：task1、task2
     #     #＃ 执行规则：通过timedelta定义
-    #     'task1': {
-    #         'task': 'task1',
-    #         'schedule': timedelta(seconds=5)
-    #     },
-    #     'task2': {
-    #         'task': 'task2',
-    #         'schedule': timedelta(seconds=10)
-    #     },
+    #     # 'task1': {
+    #     #     'task': 'task1',
+    #     #     'schedule': timedelta(seconds=5)
+    #     # },
+    #     # 'task2': {
+    #     #     'task': 'task2',
+    #     #     'schedule': timedelta(seconds=10)
+    #     # },
+    #     # },
     # }
 
 
@@ -41,7 +42,27 @@ class Config:
         pass
 
 class DevelopmentConfig(Config):
+    '''
+    # 创建数据库时需要指定编码为UTF8;
+    # CREATE DATABASE `celery` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    # grant all on celery.* to celery@'127.0.0.1' identified by 'celery';
+    # flush privileges;
+    #
+    #python manage.py shell #创建用户角色对应表
+    from manager import Role
+    Role.insert_roles()
+    Role.query.all()
+    [<Role u'Moderator'>, <Role u'Administrator'>, <Role u'User'>]
+    '''
     DEBUG = True
+    db_host = '127.0.0.1'
+    db_user = 'celery'
+    db_pass = 'celery'
+    db_name = 'celery'
+    SQLALCHEMY_DATABASE_URI = 'mysql://' + db_user + ':' + db_pass + '@' + db_host + '/' + db_name
+    #SQLALCHEMY_ECHO=False #用于显式地禁用或启用查询记录
+
+
 
 
 class TestingConfig(Config):

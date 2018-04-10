@@ -9,6 +9,7 @@ from config import config,Config
 from celery import Celery
 from flask_wtf.csrf import CSRFProtect
 
+from flaskext.markdown import Markdown
 
 app = Flask(__name__)
 
@@ -19,7 +20,8 @@ db = SQLAlchemy()
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
-login_manager = LoginManager()
+
+login_manager = LoginManager(app)
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 
@@ -31,6 +33,8 @@ def create_app(config_name):
     celery.conf.update(app.config)
 
     db.init_app(app)
+    db.app = app
+
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)

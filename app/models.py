@@ -158,3 +158,20 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class ApiTest(db.Model):
+    __tablename__ = 'apitest'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=False)
+    create_time = db.Column(db.DateTime(), default=datetime.now)
+
+    def __repr__(self):
+        return '%s' % self.name
+
+    def to_json(self):
+        return {
+            "name": self.name,
+            "create_time": self.create_time
+        }
+

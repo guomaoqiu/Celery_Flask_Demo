@@ -1,8 +1,5 @@
-{% extends "base.html" %}
 
-{% block title %}^o^ 欢迎访问{% endblock %}
 
-{% block page_content %}
 <div class="page-header">
  <div class="wrapper wrapper-content">
     <div class="row">
@@ -10,10 +7,64 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                    主页内容
+
+ 
+
+<div id="container" style="min-width:400px;height:400px"></div>
+<!--<script src="{{  url_for('static',filename='js/jquery.js') }}"></script>
+ <script src="{{  url_for('static',filename='js/highstock.js') }}"></script>
+<script src="{{  url_for('static',filename='js/exporting.js') }}"></script> -->
+<script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="https://img.hcharts.cn/highstock/highstock.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
+
+<script>
+$.getJSON('/data', function (data) {
+    if(data.code !== 1) {
+        alert('读取股票数据失败！');
+        return false;
+    }
+    data = data.data;
+    console.log(data)
+    // 去掉多余的数据
+    // Highcharts.each(data, function(d) {
+    //     d.length = 2;
+    // });
+    Highcharts.stockChart('container', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: '平安银行历史股价'
+        },
+        // plotOptions: {
+        //     series: {
+        //         showInLegend: true
+        //     }
+        // },
+        tooltip: {
+            split: false,
+            shared: true
+        },
+        series: [{
+            // type: 'line',
+            id: '000001',
+            name: '平安银行',
+            data: data
+        }]
+    });
+});
+
+
+</script>
 				        </div>
             </div>
         </div>
       </div>
    </div>
 </div>
-{% endblock %}
+
+
+
