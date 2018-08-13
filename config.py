@@ -14,7 +14,7 @@ class Config:
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USERNAME = '2399447849@qq.com' #os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = 'Guomaoqiu.310963' #os.environ.get('MAIL_PASSWORD')
+    MAIL_PASSWORD = '' #os.environ.get('MAIL_PASSWORD')
     FLASKY_MAIL_SUBJECT_PREFIX = u''
     FLASKY_MAIL_SENDER = '2399447849@qq.com'
     FLASKY_ADMIN = '2399447849@qq.com' # os.environ.get('FANXIANG_ADMIN')
